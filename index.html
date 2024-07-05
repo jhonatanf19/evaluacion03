@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIAJE BUS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 95%;
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .form-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .formulario {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .formulario h3 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        table td {
+            border: 2px solid #ccc;
+            padding: 10px;
+        }
+
+        table img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        h3 {
+            width: 700px;
+            margin-left: 250px;
+            background-color: aquamarine;
+            border-radius: 15px;
+        }
+
+        .formulario form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .formulario label {
+            margin-top: 10px;
+        }
+
+        .formulario input, .formulario select {
+            margin-bottom: 10px;
+            width: 80%;
+            padding: 5px;
+        }
+
+        .formulario button {
+            margin-top: 10px;
+        }
+        
+        .total-soles {
+            color: blue;
+        }
+
+        .total-dolares {
+            color: green;
+        }
+    </style>
+    <script>
+
+        function calcular() {
+                
+                var ruta = document.getElementById('ruta').value;
+                var cantidad = parseInt(document.getElementById('cantidad').value);
+                var servicio = document.getElementById('servicio').value;
+    
+                
+                var precioBase = 0;
+                switch (ruta) {
+                    case '1':
+                        precioBase = 20.00;
+                        break;
+                    case '2':
+                        precioBase = 25.00;
+                        break;
+                    case '3':
+                        precioBase = 30.00;
+                        break;
+                    case '4':
+                        precioBase = 40.00;
+                        break;
+                    default:
+                        precioBase = 0;
+                }
+    
+                
+                var precioFinal = precioBase * cantidad;
+    
+                
+                if (servicio === '2') { 
+                    precioFinal *= 1.1; 
+                } else if (servicio === '3') { 
+                    precioFinal *= 1.15; 
+                }
+    
+                if (cantidad === 3) {
+                    precioFinal *= 0.9; 
+                }
+    
+            
+                var totalSoles = precioFinal.toFixed(2);
+                var totalDolares = (precioFinal / 3.5).toFixed(2);
+    
+                
+                document.getElementById('precio').value = precioFinal.toFixed(2);
+                document.getElementById('xsoles').value = totalSoles;
+                document.getElementById('xdolares').value = totalDolares;
+            }
+    
+            function limpiar() {
+                
+                document.getElementById('fecha').value = '';
+                document.getElementById('DNI').value = '';
+                document.getElementById('pasajero').value = '';
+                document.getElementById('precio').value = '';
+                document.getElementById('cantidad').value = '';
+                document.getElementById('xsoles').value = '';
+                document.getElementById('xdolares').value = '';
+                document.getElementById('ruta').value = '1'; 
+                document.getElementById('servicio').value = '1'; 
+                document.getElementById('mediopago').value = '1'; 
+            }
+    
+            function imprimir() {
+                
+                window.print();
+            }
+        </script>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <td style="border: 2px solid;">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/restaurant-df8c3.appspot.com/o/logo.png?alt=media&token=00a7d91d-a035-4907-8f5e-cefee3ef636d" width="500px;" alt="Logo">
+                </td>
+                <td>
+                    <img src="https://firebasestorage.googleapis.com/v0/b/restaurant-df8c3.appspot.com/o/banner.jfif?alt=media&token=6aee1e95-bb05-45ec-bba4-3abd0e74dc87" width="1300px" alt="Banner">
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <h1>El placer de viajar en Bus</h1>
+
+    <div class="container">
+        <div class="form-container">
+            <img src="https://firebasestorage.googleapis.com/v0/b/restaurant-df8c3.appspot.com/o/unidad.png?alt=media&token=6d955179-711f-47e0-a939-c2ca9d33b507" alt="Imagen de referencia">
+        </div>
+        <div class="formulario">
+            <h3>boleta de viaje</h3>
+            <table>
+                <tr>
+                    <td class="fecha">Fecha</td>
+                    <td><input type="date" id="fecha"></td>
+                    <td class="ruc">RUC</td>
+                    <td>75521546562165</td>
+                </tr>
+                <tr>
+                    <td class="dni">DNI</td>
+                    <td><input type="text" id="DNI"></td>
+                    <td class="pasajero">PASAJERO</td>
+                    <td><input type="text" id="pasajero"></td>
+                </tr>
+                <tr>
+                    <td class="ruta">RUTA</td>
+                    <td>
+                        <select id="ruta">
+                            <option value="1">Lima - Mala-20.00</option>
+                            <option value="2">Lima - Cañete-25.00</option>
+                            <option value="3">Lima - Chincha-30.00</option>
+                            <option value="4">Lima - Pisco-40.00</option>
+                        </select>
+                    </td>
+                    <td class="precio">PRECIO</td>
+                    <td><input type="text" id="precio" readonly></td>
+                </tr>
+                <tr>
+                    <td class="cantidad">CANTIDAD</td>
+                    <td><input type="text" id="cantidad"></td>
+                </tr>
+                <tr>
+                    <td class="servicio">SERVICIO</td>
+                    <td>
+                        <select id="servicio">
+                            <option value="1">Económico</option>
+                            <option value="2">Ejecutivo +10%</option>
+                            <option value="3">Presidencial +15%</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="medio-de-pago">MEDIO DE PAGO</td>
+                    <td>
+                        <select id="mediopago">
+                            <option value="1">Efectivo</option>
+                            <option value="2">Visa</option>
+                            <option value="3">Débito</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="total-soles">Total S/</td>
+                    <td><input type="text" id="xsoles" readonly></td>
+                    <td class="total-dolares">Total US</td>
+                    <td><input type="text" id="xdolares" readonly></td>
+                </tr>
+                <tr>
+                    <td><button class="calcular" onclick="calcular();">Calcular</button></td>
+                    <td><button class="limpiar" onclick="limpiar();">Limpiar</button></td>
+                    <td><button class="imprimir" onclick="imprimir();">Imprimir</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+
+
